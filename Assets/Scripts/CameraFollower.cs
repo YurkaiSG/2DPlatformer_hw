@@ -6,7 +6,7 @@ public class CameraFollower : MonoBehaviour
     [SerializeField] private float _speed = 10;
     [SerializeField] private float _cameraDistance = -20;
 
-    private void Update()
+    private void LateUpdate()
     {
         FollowTarget();
     }

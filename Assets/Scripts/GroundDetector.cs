@@ -12,11 +12,8 @@ public class GroundDetector : MonoBehaviour
         Gizmos.DrawWireCube(transform.position - transform.up * _groundCheckCastDistance, _groundCheckBoxSize);
     }
 
-    public bool CheckGround()
+    public bool IsGrounded()
     {
-        if (Physics2D.BoxCast(transform.position, _groundCheckBoxSize, _groundCheckAngle, -transform.up, _groundCheckCastDistance, _groundLayer))
-            return true;
-        else
-            return false;
+        return Physics2D.BoxCast(transform.position, _groundCheckBoxSize, _groundCheckAngle, -transform.up, _groundCheckCastDistance, _groundLayer);
     }
 }

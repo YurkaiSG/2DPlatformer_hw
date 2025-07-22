@@ -1,4 +1,4 @@
 public interface IPickable
 {
-    public void PickUp(Player player);
+    public void PickUp();
 }

@@ -1,21 +1,20 @@
+using System;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(Animator))]
+[RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(ObjectFlipper), typeof(GroundDetector), typeof(InputReader))]
 public class PlayerMovement : MonoBehaviour
 {
-    public readonly int IsGrounded = Animator.StringToHash(nameof(IsGrounded));
-    public readonly int IsJumping = Animator.StringToHash(nameof(IsJumping));
-    public readonly int Speed = Animator.StringToHash(nameof(Speed));
-
     [SerializeField] private float _speed = 10.0f;
     [SerializeField] private float _jumpForce = 10.0f;
     private GroundDetector _groundDetector;
     private ObjectFlipper _objectFlipper;
     private InputReader _inputReader;
     private Rigidbody2D _rigidbody;
-    private Animator _animator;
-    private bool _isGrounded = true;
+
+    public bool IsGrounded { get; private set; }
+    public event Action<float> Moved;
+    public event Action Jumped;
 
     private void Awake()
     {
@@ -23,7 +22,6 @@ public class PlayerMovement : MonoBehaviour
         _objectFlipper = GetComponent<ObjectFlipper>();
         _inputReader = GetComponent<InputReader>();
         _rigidbody = GetComponent<Rigidbody2D>();
-        _animator = GetComponent<Animator>();
     }
 
     private void OnEnable()
@@ -40,27 +38,23 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (_animator.GetBool(IsJumping) && _isGrounded)
-            _animator.SetBool(IsJumping, false);
-
-        _isGrounded = _groundDetector.CheckGround();
-        _animator.SetBool(IsGrounded, _isGrounded);
+        IsGrounded = _groundDetector.IsGrounded();
     }
 
     private void Move(float direction)
     {
         _objectFlipper.FlipDirection(direction);
-        _animator.SetFloat(Speed, Mathf.Abs(direction));
+        Moved?.Invoke(direction);
         float _distance = direction * _speed * Time.deltaTime;
         transform.Translate(_distance * Vector3.right, Space.World);
     }
 
     private void ExecuteJump()
     {
-        if (_isGrounded)
+        if (IsGrounded)
         {
-            _isGrounded = false;
-            _animator.SetBool(IsJumping, true);
+            IsGrounded = false;
+            Jumped?.Invoke();
             _rigidbody.AddForce(new Vector2(_rigidbody.velocity.x, _jumpForce), ForceMode2D.Impulse);
         }
     }
