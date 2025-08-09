@@ -44,6 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66b8308ec576add43baa2899c9542bba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefab: {fileID: 7273267082966416190, guid: f93b1bf3d36cb2e45b1dae137b9f3156, type: 3}
+  _prefab: {fileID: 8952244969294736010, guid: f93b1bf3d36cb2e45b1dae137b9f3156, type: 3}
   _timeToRespawn: 10
   _spawnPoints: []

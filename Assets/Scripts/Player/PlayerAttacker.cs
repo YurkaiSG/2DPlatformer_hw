@@ -3,7 +3,7 @@ using System.Collections;
 using System;
 
 [RequireComponent(typeof(InputReader))]
-public class PlayerAttack : MonoBehaviour
+public class PlayerAttacker : MonoBehaviour
 {
     [SerializeField] private float _minDamage = 10.0f;
     [SerializeField] private float _maxDamage = 25.0f;
@@ -54,7 +54,6 @@ public class PlayerAttack : MonoBehaviour
             if (hit.collider.TryGetComponent(out IDamageable target) && this.name != hit.collider.name)
             {
                 float finalDamage = UnityEngine.Random.Range(_minDamage, _maxDamage);
-                Debug.Log($"{this.name} наносит {finalDamage} урона {target}.");
                 target.TakeDamage(finalDamage);
 
                 if (hit.collider.TryGetComponent(out Rigidbody2D rigidbody))

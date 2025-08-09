@@ -8,40 +8,29 @@ public class PlayerAnimator : MonoBehaviour
     public readonly int Speed = Animator.StringToHash(nameof(Speed));
 
     private Animator _animator;
-    private PlayerMovement _playerMovement;
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
-        _playerMovement = GetComponent<PlayerMovement>();
-    }
-
-    private void OnEnable()
-    {
-        _playerMovement.Moved += AnimateMove;
-        _playerMovement.Jumped += AnimateJump;
-    }
-
-    private void OnDisable()
-    {
-        _playerMovement.Moved -= AnimateMove;
-        _playerMovement.Jumped -= AnimateJump;
     }
 
     private void Update()
     {
-        if (_animator.GetBool(IsJumping) && _playerMovement.IsGrounded)
+        if (_animator.GetBool(IsJumping) && _animator.GetBool(IsGrounded))
             _animator.SetBool(IsJumping, false);
-
-        _animator.SetBool(IsGrounded, _playerMovement.IsGrounded);
     }
 
-    private void AnimateMove(float direction)
+    public void SetIsGrounded(bool isGrounded)
+    {
+        _animator.SetBool(IsGrounded, isGrounded);
+    }
+
+    public void PlayMove(float direction)
     {
         _animator.SetFloat(Speed, Mathf.Abs(direction));
     }
 
-    private void AnimateJump()
+    public void PlayJump()
     {
         _animator.SetBool(IsJumping, true);
     }

@@ -9,13 +9,13 @@ public class EnemyView : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.TryGetComponent(out PlayerAttack player))
+        if (other.TryGetComponent(out Player player))
             FindedTarget?.Invoke(player.transform);
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.TryGetComponent(out PlayerAttack player))
+        if (other.TryGetComponent(out Player player))
             LostTarget?.Invoke();
     }
 }

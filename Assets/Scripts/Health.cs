@@ -19,10 +19,9 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         damage = Mathf.Max(damage, minDamageValue);
         float finalHealth = CurrentValue - damage;
         CurrentValue = Mathf.Max(_minValue, finalHealth);
-        Debug.Log($"{this.name} получил {damage} урона.\n\tЗдоровье: {CurrentValue}.");
 
         if (CurrentValue == _minValue)
-            Death();
+            Die();
     }
 
     public void Heal(float value)
@@ -31,12 +30,10 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         value = Mathf.Max(value, minHealValue);
         float finalHealth = CurrentValue + value;
         CurrentValue = Mathf.Min(_maxValue, finalHealth);
-        Debug.Log($"{this.name} исцелился на {value} единиц.\n\tТекущее здоровье: {CurrentValue}.");
     }
 
-    private void Death()
+    private void Die()
     {
-        Debug.Log($"{this.name} мёртв.");
         gameObject.SetActive(false);
     }
 }

@@ -7,11 +7,11 @@ public class FirstAid : MonoBehaviour, IPickable
     [SerializeField] private float _healthValue = 45.0f;
 
     public float HealthValue => _healthValue;
-    public event Action<GameObject> PickedUp;
+    public event Action<FirstAid> PickedUp;
 
     public void PickUp()
     {
-        PickedUp?.Invoke(gameObject);
+        PickedUp?.Invoke(this);
         gameObject.SetActive(false);
     }
 }

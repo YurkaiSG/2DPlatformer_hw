@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
-public class EnemyAttack : MonoBehaviour
+public class EnemyAttacker : MonoBehaviour
 {
     [SerializeField] private float _damage = 10.0f;
     [SerializeField] private float _cooldown = 1.5f;
@@ -11,7 +11,7 @@ public class EnemyAttack : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (_canAttack && other.collider.TryGetComponent(out PlayerAttack _))
+        if (_canAttack && other.collider.TryGetComponent(out Player _))
         {
             if (other.collider.TryGetComponent(out IDamageable player))
             {

@@ -7,11 +7,11 @@ public class Coin : MonoBehaviour, IPickable
     [SerializeField] private int _coinsAmount = 1;
 
     public int CoinAmount => _coinsAmount;
-    public event Action<GameObject> PickedUp;
+    public event Action<Coin> PickedUp;
 
     public void PickUp()
     {
-        PickedUp?.Invoke(gameObject);
+        PickedUp?.Invoke(this);
         gameObject.SetActive(false);
     }
 }

@@ -1,27 +1,26 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(ObjectFlipper), typeof(Animator), typeof(EnemyView))]
+[RequireComponent(typeof(ObjectFlipper), typeof(EnemyView))]
 public class EnemyMovement : MonoBehaviour
 {
-    private readonly int Speed = Animator.StringToHash(nameof(Speed));
-
     [SerializeField] private float _speed = 8;
     [SerializeField] private Transform[] _waypoints;
     [SerializeField] private float _chaiseTime = 2.0f;
     private ObjectFlipper _objectFlipper;
-    private Animator _animator;
     private EnemyView _enemyView;
     private Transform _currentTarget;
     private int _currentWaypointIndex = 0;
     private bool _isChasing = false;
     private Coroutine _stopChaseRoutine;
 
+    public Action<float> Moved;
+
     private void Awake()
     {
         _enemyView = GetComponent<EnemyView>();
         _objectFlipper = GetComponent<ObjectFlipper>();
-        _animator = GetComponent<Animator>();
         _currentTarget = _waypoints[_currentWaypointIndex];
     }
 
@@ -50,7 +49,7 @@ public class EnemyMovement : MonoBehaviour
         Vector2 movementDirection = (_currentTarget.position - transform.position).normalized;
         _objectFlipper.FlipDirection(movementDirection.x);
         MoveToTarget(_currentTarget.position);
-        _animator.SetFloat(Speed, Mathf.Abs(movementDirection.x));
+        Moved?.Invoke(Mathf.Abs(movementDirection.x));
     }
 
     private void InitiateChase(Transform target)

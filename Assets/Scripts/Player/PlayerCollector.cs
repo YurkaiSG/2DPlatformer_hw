@@ -23,7 +23,6 @@ public class PlayerCollector : MonoBehaviour
     private void PickUpCoin(Coin coin)
     {
         _coinsAmount += coin.CoinAmount;
-        Debug.Log(_coinsAmount);
         coin.PickUp();
     }
 
