@@ -3,6 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(EnemyAnimator), typeof(EnemyMovement))]
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] private Transform _healthBar;
     private EnemyAnimator _animator;
     private EnemyMovement _movement;
 
@@ -20,5 +21,10 @@ public class Enemy : MonoBehaviour
     private void OnDisable()
     {
         _movement.Moved -= _animator.PlayMove;
+    }
+
+    private void LateUpdate()
+    {
+        _healthBar.position = transform.position;
     }
 }

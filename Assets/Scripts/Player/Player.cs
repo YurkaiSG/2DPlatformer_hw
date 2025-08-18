@@ -3,6 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class Player : MonoBehaviour
 {
+    [SerializeField] private Transform _healthBar;
     private PlayerAnimator _animator;
     private PlayerMovement _movement;
     private Jumper _jumper;
@@ -29,5 +30,10 @@ public class Player : MonoBehaviour
     private void Update()
     {
         _animator.SetIsGrounded(_jumper.IsGrounded);
+    }
+
+    private void LateUpdate()
+    {
+        _healthBar.position = transform.position;
     }
 }

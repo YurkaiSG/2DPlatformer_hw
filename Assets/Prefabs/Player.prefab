@@ -233,6 +233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc5a6b46f44656b4da6895e58f0fc987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _healthBar: {fileID: 8208588775618571040}
 --- !u!114 &5736728981328105461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,7 +347,7 @@ Transform:
   - {fileID: 8208588775618571040}
   - {fileID: 779829077447055670}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2845894025073335121
 PrefabInstance:

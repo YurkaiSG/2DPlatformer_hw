@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4638704088563747412}
-  - component: {fileID: 1699850150767517143}
+  - component: {fileID: 919612770146089113}
   m_Layer: 0
   m_Name: FirstAidSpawner
   m_TagString: Untagged
@@ -30,9 +30,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1699850150767517143
+--- !u!114 &919612770146089113
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,7 +41,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4929131034104253986}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66b8308ec576add43baa2899c9542bba, type: 3}
+  m_Script: {fileID: 11500000, guid: c8495518bdf875547b1f6318e832f336, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _prefab: {fileID: 8952244969294736010, guid: f93b1bf3d36cb2e45b1dae137b9f3156, type: 3}

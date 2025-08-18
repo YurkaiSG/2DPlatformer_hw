@@ -6,9 +6,11 @@ public class Health : MonoBehaviour, IDamageable, IHealable
     [SerializeField] private float _maxValue = 100;
 
     public event Action Changed;
+    public event Action Died;
     public float CurrentValue { get; private set; }
     public float MinValue { get; private set; }
     public float MaxValue => _maxValue;
+    public bool IsAlive { get; private set; }
 
     private void Awake()
     {
@@ -39,6 +41,8 @@ public class Health : MonoBehaviour, IDamageable, IHealable
 
     private void Die()
     {
-        //gameObject.SetActive(false);
+        IsAlive = false;
+        Died?.Invoke();
+        gameObject.SetActive(false);
     }
 }

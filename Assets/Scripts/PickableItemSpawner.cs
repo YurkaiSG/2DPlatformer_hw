@@ -1,12 +1,12 @@
 using System.Collections;
 using UnityEngine;
 
-public class FirstAidSpawner : MonoBehaviour
+public class PickableItemSpawner : MonoBehaviour
 {
-    [SerializeField] private FirstAid _prefab;
+    [SerializeField] private PickableItem _prefab;
     [SerializeField] private int _timeToRespawn = 10;
     [SerializeField] private Transform[] _spawnPoints;
-    private FirstAid _item;
+    private PickableItem _spawnedItem;
     private Vector3 nextSpawnPosition;
 
     private void Awake()
@@ -15,20 +15,20 @@ public class FirstAidSpawner : MonoBehaviour
             _spawnPoints = new Transform[] { transform };
 
         SelectRandomSpawnPoint();
-        _item = Instantiate(_prefab, nextSpawnPosition, Quaternion.identity);
+        _spawnedItem = Instantiate(_prefab, transform.position, Quaternion.identity);
     }
 
     private void OnEnable()
     {
-        _item.PickedUp += Respawn;
+        _spawnedItem.PickedUp += Respawn;
     }
 
     private void OnDisable()
     {
-        _item.PickedUp -= Respawn;
+        _spawnedItem.PickedUp -= Respawn;
     }
 
-    private void Respawn(FirstAid item)
+    private void Respawn(PickableItem item)
     {
         SelectRandomSpawnPoint();
         StartCoroutine(SpawnAfterTime(item));
@@ -39,7 +39,7 @@ public class FirstAidSpawner : MonoBehaviour
         nextSpawnPosition = _spawnPoints[Random.Range(0, _spawnPoints.Length)].position;
     }
 
-    private IEnumerator SpawnAfterTime(FirstAid item)
+    private IEnumerator SpawnAfterTime(PickableItem item)
     {
         WaitForSeconds wait = new WaitForSeconds(_timeToRespawn);
         yield return wait;
