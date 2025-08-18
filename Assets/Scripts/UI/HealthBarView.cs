@@ -2,31 +2,24 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Slider))]
-public class HealthBarView : MonoBehaviour
+public class HealthBarView : HealthBar
 {
-    [SerializeField] private Health _health;
     private Slider _slider;
+
+    private void Awake()
+    {
+        _slider = GetComponent<Slider>();
+    }
 
     private void Start()
     {
-        _slider = GetComponent<Slider>();
-        _slider.minValue = _health.MinValue;
-        _slider.maxValue = _health.MaxValue;
+        _slider.minValue = Health.MinValue;
+        _slider.maxValue = Health.MaxValue;
         ChangeView();
     }
 
-    private void OnEnable()
+    protected override void ChangeView()
     {
-        _health.Changed += ChangeView;
-    }
-
-    private void OnDisable()
-    {
-        _health.Changed -= ChangeView;
-    }
-
-    private void ChangeView()
-    {
-        _slider.value = _health.CurrentValue;
+        _slider.value = Health.CurrentValue;
     }
 }

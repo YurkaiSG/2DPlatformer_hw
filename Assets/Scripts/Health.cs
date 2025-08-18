@@ -5,7 +5,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
 {
     [SerializeField] private float _maxValue = 100;
 
-    public Action Changed;
+    public event Action Changed;
     public float CurrentValue { get; private set; }
     public float MinValue { get; private set; }
     public float MaxValue => _maxValue;
@@ -39,6 +39,6 @@ public class Health : MonoBehaviour, IDamageable, IHealable
 
     private void Die()
     {
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
     }
 }
