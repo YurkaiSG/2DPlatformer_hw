@@ -17,7 +17,7 @@ public class PlayerAttacker : MonoBehaviour
     private float _attackAngle = 0;
     private bool _canAttack = true;
 
-    public Action Attacked;
+    public event Action Attacked;
 
     private void Awake()
     {

@@ -2,14 +2,14 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(ObjectFlipper), typeof(EnemyView))]
+[RequireComponent(typeof(ObjectFlipper))]
 public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] private float _speed = 8;
     [SerializeField] private Transform[] _waypoints;
     [SerializeField] private float _chaiseTime = 2.0f;
+    [SerializeField] private EnemyView _enemyView;
     private ObjectFlipper _objectFlipper;
-    private EnemyView _enemyView;
     private Transform _currentTarget;
     private int _currentWaypointIndex = 0;
     private bool _isChasing = false;
@@ -19,7 +19,6 @@ public class EnemyMovement : MonoBehaviour
 
     private void Awake()
     {
-        _enemyView = GetComponent<EnemyView>();
         _objectFlipper = GetComponent<ObjectFlipper>();
         _currentTarget = _waypoints[_currentWaypointIndex];
     }
@@ -63,7 +62,8 @@ public class EnemyMovement : MonoBehaviour
 
     private void StopChase()
     {
-        _stopChaseRoutine = StartCoroutine(StopChasingAfterTime());
+        if (enabled)
+            _stopChaseRoutine = StartCoroutine(StopChasingAfterTime());
     }
 
     private void Patrol()

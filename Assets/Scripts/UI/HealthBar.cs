@@ -1,8 +1,13 @@
 using UnityEngine;
 
-public abstract class HealthBar : MonoBehaviour
+public class HealthBar : Bar
 {
     [SerializeField] protected Health Health;
+
+    private void Start()
+    {
+        Init(Health.MinValue, Health.MaxValue, Health.CurrentValue);
+    }
 
     private void OnEnable()
     {
@@ -13,6 +18,4 @@ public abstract class HealthBar : MonoBehaviour
     {
         Health.Changed -= ChangeView;
     }
-
-    protected abstract void ChangeView();
 }
